@@ -92,9 +92,12 @@ class Tokenizer(Component):
                     if attribute == INTENT:
                         tokens = self._split_intent(example)
                     else:
-                        tokens = self.tokenize(example, attribute)
+                        tokens = self.tokenize(example, attribute)  ##list[Token]
                         tokens = self.add_cls_token(tokens, attribute)
                     example.set(TOKENS_NAMES[attribute], tokens)
+    ###MESSAGE_ATTRIBUTES = [TEXT, INTENT, RESPONSE]
+    ###TOKENS_NAMES = {TEXT: "tokens", INTENT: "intent_tokens", RESPONSE: "response_tokens"}
+    ###查看training_data的形式
 
     def process(self, message: Message, **kwargs: Any) -> None:
         """Tokenize the incoming message."""
