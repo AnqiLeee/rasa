@@ -8,6 +8,9 @@ from rasa.nlu.constants import (
     TEXT,
     RESPONSE_IDENTIFIER_DELIMITER,
 )
+##RESPONSE_KEY_ATTRIBUTE = "response_key"
+##RESPONSE_IDENTIFIER_DELIMITER = "/"
+
 from rasa.nlu.utils import ordered
 
 
@@ -17,7 +20,7 @@ class Message:
     ) -> None:
         self.text = text
         self.time = time
-        self.data = data if data else {}
+        self.data = data if data else {}   ###data中包含什么信息？ --- data为字典形式 data中不包含text
 
         if output_properties:
             self.output_properties = output_properties
@@ -37,10 +40,10 @@ class Message:
     def as_dict_nlu(self) -> dict:
         """Get dict representation of message as it would appear in training data"""
 
-        d = self.as_dict()
+        d = self.as_dict()  ###only_output_properties=False,即d = self.data中所有value不为None的 + self.text
         if d.get(INTENT, None):
-            d[INTENT] = self.get_combined_intent_response_key()
-        d.pop(RESPONSE_KEY_ATTRIBUTE, None)
+            d[INTENT] = self.get_combined_intent_response_key()  ##intent + '/' + response_key 或 intent（如果response_key=None）
+        d.pop(RESPONSE_KEY_ATTRIBUTE, None) 
         d.pop(RESPONSE, None)
         return d
 
