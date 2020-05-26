@@ -169,16 +169,16 @@ class Trainer:
 
         self.training_data.validate()
 
-        context = kwargs
+        context = kwargs   ##这里的context是什么？
 
         for component in self.pipeline:
-            updates = component.provide_context()
+            updates = component.provide_context()  ##provide_context()函数 ：The updated component configuration.
             if updates:
                 context.update(updates)
 
-        # Before the training starts: check that all arguments are provided
+        # Before the training starts: check that all arguments are provided  
         if not self.skip_validation:
-            components.validate_required_components_from_data(
+            components.validate_required_components_from_data(  ##检测response_selector
                 self.pipeline, self.training_data
             )
 
