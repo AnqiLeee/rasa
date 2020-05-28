@@ -143,7 +143,7 @@ class RegexInterpreter(NaturalLanguageInterpreter):
     ) -> Tuple[Optional[Text], float, List[Dict[Text, Any]]]:
         """Parse the user input using regexes to extract intent & entities."""
 
-        prefixes = re.escape(RegexInterpreter.allowed_prefixes())
+        prefixes = re.escape(RegexInterpreter.allowed_prefixes()) ##re.escape：将所有转义字符前加上"\"
         # the regex matches "slot{"a": 1}"
         m = re.search("^[" + prefixes + "]?([^{@]+)(@[0-9.]+)?([{].+)?", user_input)
         if m is not None:
