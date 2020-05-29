@@ -184,7 +184,7 @@ class Event:
         """Returns a slots class by its type name."""
         from rasa.core import utils
 
-        for cls in utils.all_subclasses(Event):
+        for cls in utils.all_subclasses(Event):   ##cls.__subclasses__() + [g for s in cls.__subclasses__() for g in all_subclasses(s)]
             if cls.type_name == type_name:
                 return cls
         if type_name == "topic":
@@ -442,9 +442,6 @@ class BotUttered(Event):
 # noinspection PyProtectedMember
 class SlotSet(Event):
     """The user has specified their preference for the value of a ``slot``.
-
-    Every slot has a name and a value. This event can be used to set a
-    value for a slot on a conversation.
 
     As a side effect the ``Tracker``'s slots will be updated so
     that ``tracker.slots[key]=value``."""
