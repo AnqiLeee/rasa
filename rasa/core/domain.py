@@ -75,6 +75,8 @@ class SessionConfig(NamedTuple):
         return self.session_expiration_time > 0
 
 
+##domain.yml文件定义了可以识别的intents，slots，entities，responses。
+#其中responses是bot给予user反馈的模板，形式为字典{'responses':{utter_greet:[{'text':hello},{'text':hi}]}}  DICT[TEXT,LIST[DICT[TEXT,TEXT]]
 class Domain:
     """The domain specifies the universe in which the bot's policy acts.
 
