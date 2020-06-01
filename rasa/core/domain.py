@@ -147,6 +147,7 @@ class Domain:
                 docs=DOCS_URL_DOMAINS,
             )
             utter_templates = cls.collect_templates(data.get("templates", {}))
+            ##utter_templates即从domain文件中提取responses的内容，形成字典。字典格式为{'template_key':[template_variations]}
 
         slots = cls.collect_slots(data.get("slots", {}))
         additional_arguments = data.get("config", {})
