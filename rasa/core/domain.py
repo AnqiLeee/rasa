@@ -150,6 +150,8 @@ class Domain:
             ##utter_templates即从domain文件中提取responses的内容，形成字典。字典格式为{'template_key':[template_variations]}
 
         slots = cls.collect_slots(data.get("slots", {}))
+        ## slots即从domain文件中提取slots的内容，形成SLOT实例的列表。原字典的形式为{slot_name:{slot_prop1:slot_prop_value}....}
+        ##对于每一个slot_name,通过SLOT类方法resolve_by_type转为slot实例,形成列表。
         additional_arguments = data.get("config", {})
         session_config = cls._get_session_config(data.get(SESSION_CONFIG_KEY, {}))
         intents = data.get("intents", {})
